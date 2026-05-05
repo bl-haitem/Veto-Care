@@ -51,7 +51,7 @@ export default function Chatbot() {
                 const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer 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',
+                        'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
                         'Content-Type': 'application/json',
                         'HTTP-Referer': window.location.href,
                         'X-OpenRouter-Title': 'Veto-Care Platform',
