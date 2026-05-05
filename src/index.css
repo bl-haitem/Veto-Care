@@ -50,6 +50,9 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-[#f9fafb] text-foreground;
     font-family: 'Inter', sans-serif;
