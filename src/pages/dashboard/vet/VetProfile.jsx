@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useAuth } from '@/context/AuthContext'
+import { useAuth } from '@/context/useAuth'
 import { supabase } from '@/lib/supabase/client'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { Card } from '@/components/ui/card'
@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { WILAYAS, vetStatusConfig } from '@/lib/constants'
-import { Upload, Stethoscope } from 'lucide-react'
+import { Star, Stethoscope } from 'lucide-react'
 import { toast } from 'sonner'
+import StatusBadge from '@/components/ui/StatusBadge'
 
 export default function VetProfile() {
   const { user, profile, loading: authLoading } = useAuth()
@@ -21,8 +21,6 @@ export default function VetProfile() {
   const [wilaya, setWilaya] = useState('')
   const [adresse, setAdresse] = useState('')
   const [bio, setBio] = useState('')
-  const [avatarFile, setAvatarFile] = useState(null)
-  const [avatarPreview, setAvatarPreview] = useState(null)
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
@@ -39,94 +37,76 @@ export default function VetProfile() {
         setBio(data.bio || '')
         setWilaya(data.wilaya || '')
       }
-      if (profile) {
-        setFullName(profile.full_name || '')
-        setPhone(profile.phone || '')
-      }
     }
     fetchVet()
-  }, [user, profile])
+  }, [user])
+
+  // Sync profile fields once loaded
+  useEffect(() => {
+    if (profile) {
+      setFullName(profile.full_name || '')
+      setPhone(profile.phone || '')
+      if (!wilaya) setWilaya(profile.wilaya || '')
+    }
+  }, [profile])
 
   const handleSave = async () => {
     if (!user || !vet) return
     setSaving(true)
     try {
-      let avatarUrl = profile?.avatar_url
-
-      if (avatarFile) {
-        const { data, error } = await supabase.storage
-          .from('avatars')
-          .upload(`${user.id}/avatar`, avatarFile, { upsert: true })
-        if (error) throw error
-        avatarUrl = data?.path ?? ''
-      }
-
-      await supabase
+      // Update profiles table (full_name, phone, wilaya — all in schema)
+      const { error: profileErr } = await supabase
         .from('profiles')
-        .update({ full_name: fullName, phone, wilaya, avatar_url: avatarUrl })
+        .update({ full_name: fullName, phone, wilaya })
         .eq('id', user.id)
+      if (profileErr) throw profileErr
 
-      await supabase
+      // Update veterinaires table (adresse, bio, wilaya — all in schema)
+      const { error: vetErr } = await supabase
         .from('veterinaires')
-        .update({ adresse, bio, wilaya, photo_url: avatarUrl })
+        .update({ adresse, bio, wilaya })
         .eq('id', vet.id)
+      if (vetErr) throw vetErr
 
-      toast.success('Profil mis à jour')
+      toast.success('Profil mis à jour avec succès')
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message || 'Erreur lors de la sauvegarde')
     } finally {
       setSaving(false)
     }
   }
 
-  if (authLoading) return <DashboardLayout><p>Chargement...</p></DashboardLayout>
-
-  const avatarUrl = vet?.photo_url
-    ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${vet.photo_url}`
-    : avatarPreview || undefined
+  if (authLoading) return <DashboardLayout><p className="p-8">Chargement...</p></DashboardLayout>
 
   return (
     <DashboardLayout>
       <div className="space-y-6 max-w-2xl">
-        <h1 className="text-2xl font-bold font-heading">Mon profil vétérinaire</h1>
+        <div>
+          <h1 className="text-2xl font-bold font-heading text-gray-900">Mon profil vétérinaire</h1>
+          <p className="text-gray-600 mt-1">Gérez vos informations professionnelles</p>
+        </div>
 
-        <Card className="p-6">
-          <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
-            <Avatar className="h-24 w-24">
-              <AvatarImage src={avatarUrl} />
-              <AvatarFallback className="text-3xl bg-primary text-white">
-                {fullName?.charAt(0)?.toUpperCase() || 'V'}
-              </AvatarFallback>
-            </Avatar>
+        {/* Avatar initials card */}
+        <Card className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-6 mb-6">
+            <div className="h-20 w-20 rounded-2xl bg-teal-100 flex items-center justify-center text-teal-700 text-3xl font-black font-heading">
+              {fullName?.charAt(0)?.toUpperCase() || 'V'}
+            </div>
             <div>
-              <label className="flex items-center gap-2 px-4 py-2 border rounded-lg cursor-pointer hover:bg-accent text-sm">
-                <Upload className="h-4 w-4" />
-                Changer la photo
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    if (e.target.files[0]) {
-                      setAvatarFile(e.target.files[0])
-                      setAvatarPreview(URL.createObjectURL(e.target.files[0]))
-                    }
-                  }}
-                />
-              </label>
+              <h2 className="text-xl font-heading font-semibold text-gray-900">{fullName || 'Vétérinaire'}</h2>
+              <p className="text-sm text-gray-600">{user?.email}</p>
             </div>
           </div>
 
           {vet && (
-            <div className="flex items-center gap-2 mb-6 p-3 bg-gray-50 rounded-lg">
+            <div className="flex flex-wrap items-center gap-3 mb-6 p-3 bg-gray-50 rounded-xl border border-gray-100">
               <span className="text-sm text-gray-500">Statut :</span>
-              <Badge className={vetStatusConfig[vet.status]?.className}>
-                {vetStatusConfig[vet.status]?.label}
-              </Badge>
+              <StatusBadge status={vet.status} />
               {vet.avg_rating && (
-                <span className="text-sm ml-auto flex items-center gap-1">
-                  <Stethoscope className="h-4 w-4 text-yellow-500" />
-                  Note : {parseFloat(vet.avg_rating).toFixed(1)}/5
+                <span className="text-sm ml-auto flex items-center gap-1 text-yellow-600 font-semibold">
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  {parseFloat(vet.avg_rating).toFixed(1)}/5
+                  {vet.total_reviews && <span className="text-gray-400 font-normal">({vet.total_reviews} avis)</span>}
                 </span>
               )}
             </div>
@@ -135,15 +115,15 @@ export default function VetProfile() {
           <div className="space-y-4">
             <div>
               <Label htmlFor="full_name">Nom complet</Label>
-              <Input id="full_name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+              <Input id="full_name" value={fullName} onChange={(e) => setFullName(e.target.value)} className="mt-1 h-11 rounded-xl border-gray-200 focus-visible:ring-teal-500" />
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" value={user?.email} disabled className="bg-gray-50" />
+              <Input id="email" value={user?.email || ''} disabled className="mt-1 h-11 rounded-xl border-gray-200 bg-gray-50" />
             </div>
             <div>
               <Label htmlFor="phone">Téléphone</Label>
-              <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="mt-1 h-11 rounded-xl border-gray-200 focus-visible:ring-teal-500" />
             </div>
             <div>
               <Label htmlFor="wilaya">Wilaya</Label>
@@ -151,7 +131,7 @@ export default function VetProfile() {
                 id="wilaya"
                 value={wilaya}
                 onChange={(e) => setWilaya(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                className="flex h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm mt-1 focus:outline-none focus:ring-2 focus:ring-teal-500"
               >
                 <option value="">Sélectionner une wilaya</option>
                 {WILAYAS.map((w) => (
@@ -161,21 +141,21 @@ export default function VetProfile() {
             </div>
             <div>
               <Label htmlFor="adresse">Adresse du cabinet</Label>
-              <Input id="adresse" value={adresse} onChange={(e) => setAdresse(e.target.value)} placeholder="Adresse complète" />
+              <Input id="adresse" value={adresse} onChange={(e) => setAdresse(e.target.value)} placeholder="Adresse complète" className="mt-1 h-11 rounded-xl border-gray-200 focus-visible:ring-teal-500" />
             </div>
             <div>
               <Label htmlFor="bio">Biographie</Label>
-              <Textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Décrivez votre expérience..." rows={4} />
+              <Textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Décrivez votre expérience, spécialités..." rows={4} className="mt-1 resize-none rounded-xl border-gray-200 focus-visible:ring-teal-500" />
             </div>
             <div>
               <Label>Rôle</Label>
-              <div className="flex items-center gap-2 mt-1 px-3 py-2 bg-gray-50 rounded-md text-sm">
+              <div className="flex items-center gap-2 mt-1 px-3 py-2 bg-gray-50 rounded-xl text-sm text-gray-600">
                 <Stethoscope className="h-4 w-4 text-muted-foreground" />
                 Vétérinaire
               </div>
             </div>
-            <Button onClick={handleSave} disabled={saving} className="w-full sm:w-auto">
-              {saving ? 'Sauvegarde...' : 'Sauvegarder'}
+            <Button onClick={handleSave} disabled={saving} className="w-full h-11 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold">
+              {saving ? 'Enregistrement...' : 'Sauvegarder les modifications'}
             </Button>
           </div>
         </Card>
