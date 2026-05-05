@@ -199,7 +199,7 @@ export default function AnimalDetails() {
             </TabsTrigger>
           </TabsList>
 
-          {/* ── CARNET DE SANTÉ ── */}
+          {/* ── HEALTH RECORD ── */}
           <TabsContent value="health" className="mt-0 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-6 duration-700">
             <Card className="p-10 sm:p-12 bg-white dark:bg-slate-900 border-none shadow-2xl dark:shadow-none rounded-[3.5rem] relative overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
@@ -312,7 +312,7 @@ export default function AnimalDetails() {
             </Card>
           </TabsContent>
 
-          {/* ── DOSSIER COMPLET ── */}
+          {/* ── COMPLETE FILE ── */}
           <TabsContent value="info" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-6 duration-700">
             <Card className="p-12 bg-white dark:bg-slate-900 border-none shadow-2xl dark:shadow-none rounded-[3.5rem]">
               <div className="mb-12">

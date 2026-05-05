@@ -80,7 +80,7 @@ export default function RegisterPage() {
       const userId = authData.user?.id
       if (!userId) throw new Error('No user ID returned')
 
-      // ✅ كل العمليات هنا قبل signOut — المستخدم لازال authenticated
+      // ✅ All operations here before signOut — user is still authenticated
 
       // 1. Insert profile
       const { error: profileError } = await supabase
@@ -95,7 +95,7 @@ export default function RegisterPage() {
         })
       if (profileError) throw profileError
 
-      // 2. إذا بيطري — ارفع الملفات وأنشئ السجل
+      // 2. If veterinarian — upload files and create record
       if (values.role === 'veterinaire') {
         let document_url = null
         if (documentFile) {
@@ -119,14 +119,14 @@ export default function RegisterPage() {
           })
         if (vetError) throw vetError
 
-        // ✅ signOut بعد ما خلصنا كل شيء
+        // ✅ signOut after everything is done
         await supabase.auth.signOut()
         toast.success('Inscription réussie! En attente de vérification.')
         navigate('/auth/pending', { replace: true })
         return
       }
 
-      // ✅ للـ maitre — signOut بعد insert
+      // ✅ For owner — signOut after insert
       await supabase.auth.signOut()
       toast.success('Inscription réussie!')
       navigate('/auth/login', { replace: true })

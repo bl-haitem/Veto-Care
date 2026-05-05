@@ -13,7 +13,7 @@ export default function Navbar({ unread = 0, user = { name: 'Utilisateur' } }) {
               <path d="M8 8a4 4 0 008 0" stroke="#0D9488" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M12 14v8" stroke="#0D9488" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="font-heading font-bold text-gray-900 text-lg">Veto Care</span>
+            <span className="font-heading font-bold text-gray-900 text-lg">Veto-Care</span>
           </div>
         </div>
 

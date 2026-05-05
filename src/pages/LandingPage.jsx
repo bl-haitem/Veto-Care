@@ -24,12 +24,12 @@ export default function LandingPage() {
         <header className="relative z-30 w-full px-6 py-4 flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
             <PawPrint className="h-8 w-8 text-primary" />
-            <span className="font-bold text-xl tracking-tight">Veto Care</span>
+            <span className="font-bold text-xl tracking-tight">Veto-Care</span>
           </div>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold">
-            <a href="#about" className="hover:text-primary transition-colors">Qu'est-ce que Veto Care</a>
+            <a href="#about" className="hover:text-primary transition-colors">Qu'est-ce que Veto-Care</a>
             <a href="#features" className="hover:text-primary transition-colors">Fonctionnalités</a>
             <a href="#register-guide" className="hover:text-primary transition-colors">Guide d'inscription</a>
           </nav>
@@ -56,7 +56,7 @@ export default function LandingPage() {
         {isMenuOpen && (
           <div className="fixed inset-0 z-40 bg-gray-900/95 backdrop-blur-sm lg:hidden flex flex-col p-8 pt-24 text-white">
             <nav className="flex flex-col gap-6 text-xl font-bold mb-8">
-              <a href="#about" onClick={() => setIsMenuOpen(false)}>Qu'est-ce que Veto Care</a>
+              <a href="#about" onClick={() => setIsMenuOpen(false)}>Qu'est-ce que Veto-Care</a>
               <a href="#features" onClick={() => setIsMenuOpen(false)}>Fonctionnalités</a>
               <a href="#register-guide" onClick={() => setIsMenuOpen(false)}>Guide d'inscription</a>
             </nav>
@@ -108,13 +108,13 @@ export default function LandingPage() {
             {/* Content Column */}
             <div className="flex-1 text-left">
               <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-bold mb-6">
-                C'est quoi Veto Care
+                C'est quoi Veto-Care
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight text-[#0D3B23]">
-                Qu'est-ce que<br/>Veto Care ?
+                Qu'est-ce que<br/>Veto-Care ?
               </h2>
               <p className="text-base sm:text-lg leading-relaxed text-gray-500 max-w-xl">
-                Veto Care est une plateforme complète conçue pour rapprocher les propriétaires d'animaux et les vétérinaires professionnels. Nous offrons une expérience numérique fluide pour gérer les dossiers médicaux de vos animaux, planifier des rendez-vous, et trouver les meilleurs soins possibles pour vos compagnons à quatre pattes.
+                Veto-Care est une plateforme complète conçue pour rapprocher les propriétaires d'animaux et les vétérinaires professionnels. Nous offrons une expérience numérique fluide pour gérer les dossiers médicaux de vos animaux, planifier des rendez-vous, et trouver les meilleurs soins possibles pour vos compagnons à quatre pattes.
               </p>
             </div>
 
@@ -123,7 +123,7 @@ export default function LandingPage() {
               <div className="absolute inset-0 bg-primary/10 rounded-[1.5rem] sm:rounded-[2rem] transform -rotate-3 lg:-rotate-6 translate-x-3 lg:translate-x-4 -translate-y-3 lg:-translate-y-4"></div>
               <img 
                 src="https://img.freepik.com/photos-gratuite/veterinaire-prenant-soin-chien-compagnie_23-2149198684.jpg" 
-                alt="Veto Care Overview" 
+                alt="Veto-Care Overview" 
                 className="relative z-10 w-full h-[300px] sm:h-[400px] object-cover rounded-[1.5rem] sm:rounded-[2rem] shadow-xl border border-gray-100"
               />
             </div>
@@ -212,7 +212,7 @@ export default function LandingPage() {
 
       <footer className="py-12 bg-gray-900 text-gray-400 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-sm sm:text-base">© 2026 Veto Care — Tous droits réservés</p>
+          <p className="text-sm sm:text-base">© 2026 Veto-Care — Tous droits réservés</p>
         </div>
       </footer>
     </div>

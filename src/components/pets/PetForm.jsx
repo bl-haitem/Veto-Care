@@ -53,7 +53,7 @@ export default function PetForm({ onSubmit, isLoading = false, initialData = nul
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
 
-      {/* ── Informations générales ── */}
+      {/* ── General Information ── */}
       <Card className="p-6 space-y-4">
         <p className="text-base font-semibold text-gray-800">Informations de l&apos;animal</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -137,7 +137,7 @@ export default function PetForm({ onSubmit, isLoading = false, initialData = nul
         </div>
       </Card>
 
-      {/* ── Dossier médical (pet_carnets) ── */}
+      {/* ── Medical File (pet_carnets) ── */}
       <Card className="p-6 space-y-4">
         <p className="text-base font-semibold text-gray-800">Dossier médical</p>
 

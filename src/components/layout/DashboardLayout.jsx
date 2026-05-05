@@ -82,7 +82,7 @@ export default function DashboardLayout({ children }) {
                   <PawPrint className="h-5 w-5 text-white" />
                 </div>
                 <span className="text-lg font-bold text-gray-900">
-                  Veto Care
+                  Veto-Care
                 </span>
               </Link>
             </div>

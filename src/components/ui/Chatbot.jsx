@@ -54,7 +54,7 @@ export default function Chatbot() {
                         'Authorization': 'Bearer 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',
                         'Content-Type': 'application/json',
                         'HTTP-Referer': window.location.href,
-                        'X-OpenRouter-Title': 'Veto Care Platform',
+                        'X-OpenRouter-Title': 'Veto-Care Platform',
                     },
                     body: JSON.stringify({
                         model,

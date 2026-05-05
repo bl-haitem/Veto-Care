@@ -90,7 +90,7 @@ export default function OwnerDashboard() {
                 Bonjour, {profile?.full_name?.split(' ')[0]} 👋
               </h1>
               <p className="text-teal-50 mt-2 text-lg max-w-md">
-                Gérez la santé de vos animaux en toute simplicité sur Veto Care.
+                Gérez la santé de vos animaux en toute simplicité sur Veto-Care.
               </p>
             </div>
             <Link to="/vets">

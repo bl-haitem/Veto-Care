@@ -136,7 +136,7 @@ export default function VetDashboard() {
           if (ownerProfile?.email) {
             sendEmail(
               ownerProfile.email,
-              'Rendez-vous confirmé - Veto Care',
+              'Rendez-vous confirmé - Veto-Care',
               emailTemplates.appointmentConfirmed({
                 ownerName: ownerProfile.full_name || 'Client',
                 vetName: profile?.full_name || 'Vétérinaire',
@@ -161,7 +161,7 @@ export default function VetDashboard() {
           if (ownerProfile?.email) {
             sendEmail(
               ownerProfile.email,
-              'Rendez-vous refusé - Veto Care',
+              'Rendez-vous refusé - Veto-Care',
               emailTemplates.appointmentDeclined({
                 ownerName: ownerProfile.full_name || 'Client',
                 vetName: profile?.full_name || 'Vétérinaire',
@@ -453,7 +453,7 @@ export default function VetDashboard() {
                 </div>
                 <h3 className="font-bold text-lg leading-tight">Développez votre patientèle</h3>
                 <p className="text-teal-50 text-xs mt-2 leading-relaxed opacity-80">
-                  Améliorez votre profil et consultez les avis de vos clients pour attirer plus de propriétaires d'animaux sur Veto Care.
+                  Améliorez votre profil et consultez les avis de vos clients pour attirer plus de propriétaires d'animaux sur Veto-Care.
                 </p>
                 <Button variant="ghost" className="mt-4 text-white hover:bg-white/10 p-0 h-auto text-xs font-bold flex items-center gap-1"
                   onClick={() => navigate('/dashboard/vet/profile')}>
