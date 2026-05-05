@@ -168,14 +168,14 @@ export default function MyAnimals() {
     <DashboardLayout>
       <div className="space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-black font-heading text-gray-900 dark:text-white tracking-tight">Mes Animaux</h1>
-            <p className="text-gray-500 dark:text-gray-400 mt-1 font-medium leading-relaxed">Gérez vos compagnons et leur dossier médical</p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div className="text-center sm:text-left">
+            <h1 className="text-2xl sm:text-3xl font-black font-heading text-gray-900 dark:text-white tracking-tight">Mes Animaux</h1>
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mt-1 font-medium leading-relaxed">Gérez vos compagnons et leur dossier médical</p>
           </div>
           <Button
             onClick={() => { setEditingAnimal(null); setShowAddDialog(true) }}
-            className="flex items-center gap-2 rounded-2xl h-12 px-6 font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl h-12 px-6 font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95"
           >
             <PlusCircle className="h-5 w-5" />
             <span>Ajouter un animal</span>
@@ -190,17 +190,17 @@ export default function MyAnimals() {
             ))}
           </div>
         ) : animals.length === 0 ? (
-          <Card className="p-16 text-center flex flex-col items-center justify-center border-none bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm">
-            <div className="h-24 w-24 bg-teal-50 dark:bg-teal-500/10 rounded-[2rem] flex items-center justify-center mb-6">
-              <PawPrint className="h-12 w-12 text-primary opacity-40" />
+          <Card className="p-8 sm:p-16 text-center flex flex-col items-center justify-center border-none bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm">
+            <div className="h-16 w-16 sm:h-24 sm:w-24 bg-teal-50 dark:bg-teal-500/10 rounded-[1.5rem] sm:rounded-[2rem] flex items-center justify-center mb-6">
+              <PawPrint className="h-8 w-8 sm:h-12 sm:w-12 text-primary opacity-40" />
             </div>
-            <h3 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">Aucun animal enregistré</h3>
-            <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-sm font-medium leading-relaxed">
+            <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">Aucun animal enregistré</h3>
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mt-2 max-w-sm font-medium leading-relaxed">
               Commencez par ajouter votre premier compagnon.
             </p>
             <Button
               onClick={() => { setEditingAnimal(null); setShowAddDialog(true) }}
-              className="mt-8 rounded-2xl h-12 px-8 font-bold shadow-lg shadow-primary/20"
+              className="mt-8 w-full sm:w-auto rounded-2xl h-12 px-8 font-bold shadow-lg shadow-primary/20"
             >
               Ajouter mon premier animal
             </Button>

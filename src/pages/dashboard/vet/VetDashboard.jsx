@@ -290,14 +290,14 @@ export default function VetDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Today's Schedule Timeline */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <h2 className="text-xl font-bold font-heading text-gray-900">Planning</h2>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <button
                   onClick={() => setWeekStart(subWeeks(weekStart, 1))}
-                  className="text-sm font-semibold text-gray-500 hover:text-teal-600"
+                  className="text-xs md:text-sm font-semibold text-gray-500 hover:text-teal-600"
                 >
-                  Semaine précédente
+                  Précédent
                 </button>
                 <button
                   onClick={() => {
@@ -305,22 +305,22 @@ export default function VetDashboard() {
                     setSelectedDate(format(today, 'yyyy-MM-dd'))
                     setWeekStart(startOfWeek(today, { weekStartsOn: 1 }))
                   }}
-                  className="text-sm font-semibold text-teal-600 hover:underline"
+                  className="text-xs md:text-sm font-semibold text-teal-600 hover:underline"
                 >
-                  Voir calendrier complet
+                  Aujourd'hui
                 </button>
                 <button
                   onClick={() => setWeekStart(addWeeks(weekStart, 1))}
-                  className="text-sm font-semibold text-gray-500 hover:text-teal-600"
+                  className="text-xs md:text-sm font-semibold text-gray-500 hover:text-teal-600"
                 >
-                  Semaine suivante
+                  Suivant
                 </button>
               </div>
             </div>
 
             <Card className="p-0 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="p-6 border-b border-gray-50 bg-gray-50/30">
-                <div className="flex gap-4 overflow-x-auto pb-2">
+              <div className="p-4 md:p-6 border-b border-gray-50 bg-gray-50/30">
+                <div className="flex gap-2 md:gap-4 overflow-x-auto pb-4 custom-scrollbar scrollbar-hide">
                   {weekDays.map((day, i) => {
                     const dateStr = format(day, 'yyyy-MM-dd')
                     const isSelected = selectedDate === dateStr
@@ -328,12 +328,12 @@ export default function VetDashboard() {
                       <button
                         key={i}
                         onClick={() => setSelectedDate(dateStr)}
-                        className={`flex flex-col items-center min-w-[60px] py-3 px-2 rounded-2xl transition-all cursor-pointer ${isSelected ? 'bg-teal-600 text-white shadow-lg shadow-teal-100' : 'hover:bg-teal-50'}`}
+                        className={`flex flex-col items-center min-w-[56px] md:min-w-[60px] py-2 md:py-3 px-2 rounded-2xl transition-all cursor-pointer ${isSelected ? 'bg-teal-600 text-white shadow-lg shadow-teal-100' : 'bg-white hover:bg-teal-50 border border-gray-100'}`}
                       >
                         <span className={`text-[10px] font-bold uppercase tracking-widest ${isSelected ? 'text-teal-100' : 'text-gray-400'}`}>
                           {format(day, 'EEE', { locale: fr })}
                         </span>
-                        <span className="text-lg font-bold mt-1">{format(day, 'd')}</span>
+                        <span className="text-base md:text-lg font-bold mt-1">{format(day, 'd')}</span>
                       </button>
                     )
                   })}

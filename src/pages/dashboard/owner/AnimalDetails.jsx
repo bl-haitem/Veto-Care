@@ -160,25 +160,25 @@ export default function AnimalDetails() {
                 <PawPrint size={24} />
               </div>
             </div>
-            <div className="flex-1 text-center md:text-left pt-4">
-              <div className="flex flex-col md:flex-row md:items-center gap-5 mb-4">
-                <h1 className="text-5xl font-black text-gray-900 dark:text-white tracking-tighter">{animal.name}</h1>
-                <div className="bg-primary/10 text-primary border border-primary/20 rounded-2xl px-5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] w-fit mx-auto md:mx-0">
+            <div className="flex-1 text-center md:text-left pt-0 md:pt-4">
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 mb-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tighter">{animal.name}</h1>
+                <div className="bg-primary/10 text-primary border border-primary/20 rounded-2xl px-4 md:px-5 py-1 md:py-1.5 text-[10px] font-black uppercase tracking-[0.2em] w-fit mx-auto md:mx-0">
                   {animal.species}
                 </div>
               </div>
-              <p className="text-2xl font-bold text-gray-400 dark:text-gray-500 mb-10 tracking-tight">
-                {animal.breed || 'Race non précisée'} <span className="mx-4 opacity-20">•</span> {animal.date_of_birth ? Math.floor((new Date() - new Date(animal.date_of_birth)) / (365.25 * 24 * 60 * 60 * 1000)) : '-'} ans
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-400 dark:text-gray-500 mb-6 md:mb-10 tracking-tight">
+                {animal.breed || 'Race non précisée'} <span className="mx-2 md:mx-4 opacity-20">•</span> {animal.date_of_birth ? Math.floor((new Date() - new Date(animal.date_of_birth)) / (365.25 * 24 * 60 * 60 * 1000)) : '-'} ans
               </p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-6">
-                <Link to="/vets">
-                  <Button className="h-16 rounded-2xl px-10 flex items-center gap-3 font-black text-lg shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95">
-                    <Calendar className="h-6 w-6" />
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-4 md:gap-6">
+                <Link to="/vets" className="w-full sm:w-auto">
+                  <Button className="w-full h-14 md:h-16 rounded-2xl px-8 md:px-10 flex items-center justify-center gap-3 font-black text-base md:text-lg shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95">
+                    <Calendar className="h-5 w-5 md:h-6 md:w-6" />
                     <span>Réserver un RDV</span>
                   </Button>
                 </Link>
-                <Button variant="outline" className="h-16 rounded-2xl px-10 border-gray-100 dark:border-slate-800 text-gray-500 dark:text-gray-400 font-black text-lg flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all">
-                  <Printer className="h-6 w-6" />
+                <Button variant="outline" className="w-full sm:w-auto h-14 md:h-16 rounded-2xl px-8 md:px-10 border-gray-100 dark:border-slate-800 text-gray-500 dark:text-gray-400 font-black text-base md:text-lg flex items-center justify-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all">
+                  <Printer className="h-5 w-5 md:h-6 md:w-6" />
                   <span>Imprimer Carnet</span>
                 </Button>
               </div>
@@ -188,12 +188,12 @@ export default function AnimalDetails() {
 
         {/* Content Tabs */}
         <Tabs defaultValue="health" className="w-full">
-          <TabsList className="bg-white dark:bg-slate-900 p-2 rounded-[2rem] w-full sm:w-fit mb-10 shadow-xl dark:shadow-none border border-gray-100 dark:border-slate-800">
-            <TabsTrigger value="health" className="rounded-[1.5rem] px-10 h-12 data-[state=active]:bg-primary data-[state=active]:text-white shadow-none transition-all font-black text-xs uppercase tracking-widest dark:text-gray-400">
+          <TabsList className="bg-white dark:bg-slate-900 p-1.5 md:p-2 rounded-[2rem] w-full lg:w-fit mb-8 md:mb-10 shadow-xl dark:shadow-none border border-gray-100 dark:border-slate-800 overflow-x-auto flex-nowrap justify-start">
+            <TabsTrigger value="health" className="flex-1 lg:flex-none rounded-[1.5rem] px-6 md:px-10 h-10 md:h-12 data-[state=active]:bg-primary data-[state=active]:text-white shadow-none transition-all font-black text-[10px] md:text-xs uppercase tracking-widest dark:text-gray-400 whitespace-nowrap">
               <Stethoscope className="h-4 w-4 mr-2" />
               Carnet de santé
             </TabsTrigger>
-            <TabsTrigger value="info" className="rounded-[1.5rem] px-10 h-12 data-[state=active]:bg-primary data-[state=active]:text-white shadow-none transition-all font-black text-xs uppercase tracking-widest dark:text-gray-400">
+            <TabsTrigger value="info" className="flex-1 lg:flex-none rounded-[1.5rem] px-6 md:px-10 h-10 md:h-12 data-[state=active]:bg-primary data-[state=active]:text-white shadow-none transition-all font-black text-[10px] md:text-xs uppercase tracking-widest dark:text-gray-400 whitespace-nowrap">
               <FileText className="h-4 w-4 mr-2" />
               Dossier Complet
             </TabsTrigger>

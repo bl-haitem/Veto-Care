@@ -344,13 +344,15 @@ export default function VetAppointments() {
             {[1, 2, 3].map(i => <Skeleton key={i} className="h-20 w-full rounded-xl" />)}
           </div>
         ) : (
-          <Tabs defaultValue="pending" className="space-y-4">
-            <TabsList className="bg-white border border-gray-100 rounded-xl p-1">
-              <TabsTrigger value="pending">En attente ({pending.length})</TabsTrigger>
-              <TabsTrigger value="upcoming">À venir ({upcoming.length})</TabsTrigger>
-              <TabsTrigger value="past">Passés ({past.length})</TabsTrigger>
-              <TabsTrigger value="cancelled">Annulés ({cancelled.length})</TabsTrigger>
-            </TabsList>
+          <Tabs defaultValue="pending" className="space-y-6">
+            <div className="overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide lg:overflow-visible">
+              <TabsList className="bg-white border border-gray-100 rounded-xl p-1 w-max lg:w-full">
+                <TabsTrigger value="pending" className="px-4 py-2 text-xs sm:text-sm">En attente ({pending.length})</TabsTrigger>
+                <TabsTrigger value="upcoming" className="px-4 py-2 text-xs sm:text-sm">À venir ({upcoming.length})</TabsTrigger>
+                <TabsTrigger value="past" className="px-4 py-2 text-xs sm:text-sm">Passés ({past.length})</TabsTrigger>
+                <TabsTrigger value="cancelled" className="px-4 py-2 text-xs sm:text-sm">Annulés ({cancelled.length})</TabsTrigger>
+              </TabsList>
+            </div>
 
             <TabsContent value="pending" className="space-y-3 mt-4">
               {pending.length === 0

@@ -170,9 +170,9 @@ export default function PatientDetails() {
           </div>
         </Card>
 
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold font-heading text-gray-900">Carnet du patient</h2>
-          <Button className="h-11 rounded-xl bg-teal-600 hover:bg-teal-700" onClick={() => setOpenUpload(true)}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <h2 className="text-xl font-bold font-heading text-gray-900 text-center sm:text-left">Carnet du patient</h2>
+          <Button className="w-full sm:w-auto h-11 rounded-xl bg-teal-600 hover:bg-teal-700" onClick={() => setOpenUpload(true)}>
             <Upload className="h-4 w-4 mr-2" /> Ajouter un document
           </Button>
         </div>
