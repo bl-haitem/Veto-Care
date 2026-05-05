@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { supabase } from '@/lib/supabase/client'
-import { useAuth } from '@/context/AuthContext'
+import { useAuth } from '@/context/useAuth'
 import AuthLayout from '@/components/layout/AuthLayout'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
+import { ArrowUpRight } from 'lucide-react'
 
 const loginSchema = z.object({
   email: z.string().email('Email invalide'),
@@ -105,26 +106,49 @@ export default function LoginPage() {
   }
 
   return (
-    <AuthLayout title="Connexion" subtitle="Accédez à votre espace Veto Care">
-      <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
+    <AuthLayout 
+      title="Bonjour!" 
+      subtitle="Pour vous connecter à votre compte, renseignez votre adresse email ainsi que votre mot de passe."
+    >
+      <form onSubmit={handleSubmit(handleLogin)} className="space-y-6">
         <div>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" {...register('email')} placeholder="email@exemple.com" />
-          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+          <Input 
+            id="email" 
+            type="email" 
+            {...register('email')} 
+            placeholder="Votre adresse email" 
+            className="h-14 rounded-2xl bg-gray-50 border-none px-6 focus-visible:ring-[#14a38b]/20"
+          />
+          {errors.email && <p className="text-red-500 text-xs mt-1 px-2">{errors.email.message}</p>}
         </div>
 
         <div>
-          <Label htmlFor="password">Mot de passe</Label>
-          <Input id="password" type="password" {...register('password')} placeholder="Votre mot de passe" />
-          {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
+          <Input 
+            id="password" 
+            type="password" 
+            {...register('password')} 
+            placeholder="Votre mot de passe" 
+            className="h-14 rounded-2xl bg-gray-50 border-none px-6 focus-visible:ring-[#14a38b]/20"
+          />
+          {errors.password && <p className="text-red-500 text-xs mt-1 px-2">{errors.password.message}</p>}
         </div>
 
-        <Button type="submit" className="w-full" disabled={submitting}>
-          {submitting ? 'Connexion...' : 'Se connecter'}
+        <div className="flex justify-start">
+          <Link to="/auth/forgot-password" size="sm" className="text-xs text-[#14a38b] font-bold hover:underline">
+            Mot de passe oublié?
+          </Link>
+        </div>
+
+        <Button 
+          type="submit" 
+          className="w-full h-14 rounded-2xl bg-black hover:bg-gray-800 text-white font-black text-sm uppercase tracking-widest transition-all" 
+          disabled={submitting}
+        >
+          {submitting ? 'Connexion...' : 'SE CONNECTER'}
         </Button>
 
-        <p className="text-center text-sm text-gray-500 mt-4">
-          Pas encore de compte ? <Link to="/auth/register" className="text-primary hover:underline font-medium">S&apos;inscrire</Link>
+        <p className="text-center text-sm text-gray-400 font-medium mt-6">
+          Pas encore de compte ? <Link to="/auth/register" className="text-[#14a38b] font-bold hover:underline">S&apos;inscrire</Link>
         </p>
       </form>
     </AuthLayout>

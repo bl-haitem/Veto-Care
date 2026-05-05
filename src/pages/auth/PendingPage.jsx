@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '@/lib/supabase/client'
 import AuthLayout from '@/components/layout/AuthLayout'
 import { Card } from '@/components/ui/card'
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Clock, MapPin, Building, LogIn } from 'lucide-react'
 import { vetStatusConfig } from '@/lib/constants'
 import { toast } from 'sonner'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function PendingPage() {
   const navigate = useNavigate()
@@ -145,6 +146,13 @@ export default function PendingPage() {
           </Button>
         </Card>
       )}
+      {/* Back to Home */}
+      <div className="mt-8 pt-6 border-t border-gray-100 flex justify-center">
+        <Link to="/" className="text-sm text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
+          <ArrowUpRight className="h-4 w-4 rotate-225" />
+          Retour à l&apos;accueil
+        </Link>
+      </div>
     </AuthLayout>
   )
 }
