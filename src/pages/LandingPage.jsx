@@ -3,20 +3,23 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { PawPrint, Calendar, Stethoscope, Bell, MessageSquare, Clock, ArrowUpRight, Menu, X } from 'lucide-react'
+import DemoModal from '@/components/ui/DemoModal'
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showDemoModal, setShowDemoModal] = useState(true)
 
   return (
     <div className="min-h-screen font-sans bg-gray-50 text-gray-900">
+      <DemoModal open={showDemoModal} onClose={() => setShowDemoModal(false)} />
       {/* HERO SECTION */}
       <div className="relative min-h-screen flex flex-col">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0 bg-black">
-          <img 
-            src="/cat_peeking.png" 
-            alt="Cat Background" 
-            className="w-full h-full object-cover object-center opacity-40" 
+          <img
+            src="/cat_peeking.png"
+            alt="Cat Background"
+            className="w-full h-full object-cover object-center opacity-40"
           />
         </div>
 
@@ -44,7 +47,7 @@ export default function LandingPage() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className="lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -60,9 +63,9 @@ export default function LandingPage() {
               <a href="#features" onClick={() => setIsMenuOpen(false)}>Fonctionnalités</a>
               <a href="#register-guide" onClick={() => setIsMenuOpen(false)}>Guide d'inscription</a>
             </nav>
-            
+
             <div className="h-px bg-white/10 mb-8" />
-            
+
             <div className="mt-auto flex flex-col gap-4">
               <Link to="/auth/login" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="outline" className="w-full h-12 text-white border-white/20 bg-transparent hover:bg-white/10">Connexion</Button>
@@ -78,7 +81,7 @@ export default function LandingPage() {
         <main className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-6 flex flex-col justify-center py-20 lg:py-0">
           <div className="text-left">
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
-              La santé de votre animal,<br/>
+              La santé de votre animal,<br />
               <span className="text-primary block mt-2">notre priorité</span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-200 mt-6 max-w-2xl leading-relaxed font-medium">
@@ -104,14 +107,14 @@ export default function LandingPage() {
       <section id="about" className="py-20 lg:py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-            
+
             {/* Content Column */}
             <div className="flex-1 text-left">
               <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-bold mb-6">
                 C'est quoi Veto-Care
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight text-[#0D3B23]">
-                Qu'est-ce que<br/>Veto-Care ?
+                Qu'est-ce que<br />Veto-Care ?
               </h2>
               <p className="text-base sm:text-lg leading-relaxed text-gray-500 max-w-xl">
                 Veto-Care est une plateforme complète conçue pour rapprocher les propriétaires d'animaux et les vétérinaires professionnels. Nous offrons une expérience numérique fluide pour gérer les dossiers médicaux de vos animaux, planifier des rendez-vous, et trouver les meilleurs soins possibles pour vos compagnons à quatre pattes.
@@ -121,9 +124,9 @@ export default function LandingPage() {
             {/* Image Column */}
             <div className="flex-1 relative w-full max-w-md lg:max-w-none mt-12 lg:mt-0">
               <div className="absolute inset-0 bg-primary/10 rounded-[1.5rem] sm:rounded-[2rem] transform -rotate-3 lg:-rotate-6 translate-x-3 lg:translate-x-4 -translate-y-3 lg:-translate-y-4"></div>
-              <img 
-                src="https://img.freepik.com/photos-gratuite/veterinaire-prenant-soin-chien-compagnie_23-2149198684.jpg" 
-                alt="Veto-Care Overview" 
+              <img
+                src="https://img.freepik.com/photos-gratuite/veterinaire-prenant-soin-chien-compagnie_23-2149198684.jpg"
+                alt="Veto-Care Overview"
                 className="relative z-10 w-full h-[300px] sm:h-[400px] object-cover rounded-[1.5rem] sm:rounded-[2rem] shadow-xl border border-gray-100"
               />
             </div>
@@ -138,7 +141,7 @@ export default function LandingPage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Fonctionnalités</h2>
             <p className="mt-4 text-base sm:text-lg text-gray-500">Tout ce dont vous avez besoin pour soigner vos animaux.</p>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               { id: 1, icon: Calendar, title: "Rendez-vous en ligne", desc: "Réservez facilement un créneau chez votre vétérinaire, 24h/24." },
@@ -167,28 +170,28 @@ export default function LandingPage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Comment s'inscrire</h2>
             <p className="mt-4 text-base sm:text-lg text-gray-500">Rejoignez notre plateforme, que vous soyez propriétaire d'un animal ou une clinique vétérinaire.</p>
           </div>
-          
+
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {[
-              { 
-                id: 'owner', 
-                icon: PawPrint, 
-                title: "En tant que Propriétaire", 
+              {
+                id: 'owner',
+                icon: PawPrint,
+                title: "En tant que Propriétaire",
                 steps: [
                   "Cliquez sur le bouton \"S'inscrire\" et sélectionnez \"Propriétaire\".",
                   "Remplissez vos informations personnelles pour créer un compte.",
                   "Ajoutez vos animaux à votre profil et commencez à prendre rendez-vous."
-                ] 
+                ]
               },
-              { 
-                id: 'vet', 
-                icon: Stethoscope, 
-                title: "En tant que Vétérinaire", 
+              {
+                id: 'vet',
+                icon: Stethoscope,
+                title: "En tant que Vétérinaire",
                 steps: [
                   "Cliquez sur \"S'inscrire\" et choisissez l'option \"Vétérinaire\".",
                   "Fournissez vos justificatifs professionnels et les informations de votre clinique.",
                   "Configurez vos disponibilités et commencez à recevoir des rendez-vous."
-                ] 
+                ]
               },
             ].map((r) => (
               <div key={r.id} className="p-8 sm:p-10 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 bg-white">
